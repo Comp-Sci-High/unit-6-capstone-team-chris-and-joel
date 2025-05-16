@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
+const ejs = require("ejs")
 const app = express();
 
 app.use((req, res, next) => {
@@ -9,6 +9,9 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static(__dirname + "/public"))
+
+const mongoDBConnectionString =
+  "mongodb+srv://SE12:<CSH2025>@cluster0.kzjul.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 app.set("view engine", "ejs");
 
