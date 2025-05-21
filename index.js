@@ -20,6 +20,7 @@ app.use(express.json());
 const cshteamsSchema = new mongoose.Schema({
   teamName: { type: String },
   teamImage: { type: String },
+  description: { type: String}
 })
 
 const gameSchema = new mongoose.Schema({
@@ -30,6 +31,7 @@ const gameSchema = new mongoose.Schema({
 })
 
 const playerSchema = new mongoose.Schema({
+  team: {type: String, required: true },
   number: { type: Number, required: true },
   firstName: { type: String, required: true },
    lastName: { type: String, required: true },
@@ -48,10 +50,12 @@ const Player = mongoose.model("player", playerSchema, "players");
 app.post("/add/player", async (req, res)=> {
   const me = await new Player ({
     firstName: req.body.firstName,
+    number: req.body.number,
     lastName: req.body.lastName,
     year: req.body.year,
     height: req.body.height,
    bio: req.body.bio
+   // number
   }).save()
   res.json(Player)
 })
@@ -59,32 +63,20 @@ app.post("/add/player", async (req, res)=> {
 app.get("/", async (req, res)=>{
   const players = await Player.find({})
     res.render("players.ejs", {players})
+    //create views and players.ejs
 })
 
-app.patch("/player/:name", async (req, res) =>{
-  const response = await Player.findOneAndUpdate({player: req.params.playerName}, {firstName: req.body.firstName})
+app.patch("/player/:_id", async (req, res) =>{
+  const response = await Player.findOneAndUpdate({_id: req.params.playerName}, {firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    number: req.body.number,
+    year: req.body.year,
+    height: req.body.height,
+   bio: req.body.bio})
   res.json(response)
 })
 
-app.patch("/player/:name", async (req, res) =>{
-  const response = await Player.findOneAndUpdate({player: req.params.playerName}, {lastName: req.body.lastName})
-  res.json(response)
-})
 
-app.patch("/player/:name", async (req, res) =>{
-  const response = await Player.findOneAndUpdate({player: req.params.playerName}, {height: req.body.height})
-  res.json(response)
-})
-
-app.patch("/player/:name", async (req, res) =>{
-  const response = await Player.findOneAndUpdate({player: req.params.playerName}, {bio: req.body.population})
-  res.json(response)
-})
-
-app.patch("/player/:name", async (req, res) =>{
-  const response = await Player.findOneAndUpdate({player: req.params.playerName}, {bio: req.body.bio})
-  res.json(response)
-})
 
 app.delete("/delete/player", async (req, res) => {
     const response = await Player.findOneAndDelete({ 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Track</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <h1>The Team</h1>
+
+  <div class="card-container">
+    <% for(let i = 0; i < students.length; i++){ %>
+      <div class="card">
+        <img src="<%= students[i].image %>" alt="Profile Picture">
+        <h2><%= students[i].name %></h2>
+        <p>Grade: <%= students[i].grade %></p>
+
+        <div class="button-wrapper">
+           
+
+
+
+        </div>
+
+      </div>
+    <% } %>
+  </div>
+
+</body>
+</html>
