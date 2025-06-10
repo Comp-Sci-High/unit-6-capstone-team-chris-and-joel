@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>e</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <h1>The Team</h1>
+
+  <div class="card-container">
+    <% for(let i = 0; i < students.length; i++){ %>
+      <div class="card">
+        <img src="<%= students[i].image %>" alt="Profile Picture">
+        <h2><%= students[i].name %></h2>
+        <p>Grade: <%= students[i].grade %></p>
+
+        <div class="button-wrapper">
+           
+      <form id="createPlayerForm">
+        <input type="text" name="team" required/>
+        <input type="number" name="number" required/>
+
+        <input type="text" name="firstName" requred/>
+
+        <input type="text" name="lastName" required/>
+
+        <input type="number" name="year" required/>
+
+        <input type="text" name="height" required/>
+
+        <input type="text" name="bio" required/>
+
+        <button type="submit">Add Player</button>
+      </form>
+
+
+        </div>
+               <button onclick="deletePlayer('<%= players[i]._id %>')">Delete</button>
+
+      </div>
+    <% } %>
+  </div>
+
+</body>
+</html>

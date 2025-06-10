@@ -76,14 +76,25 @@ app.patch("/player/:_id", async (req, res) =>{
   res.json(response)
 })
 
-
-
-app.delete("/delete/player", async (req, res) => {
-    const response = await Player.findOneAndDelete({ 
-   title: req.params.name
-    })
-   res.json(response)
+app.patch("/teams/:id", async (req, res)=>{
+  const response = await Teams.findOneAndUpdate({_id: req.params.playerName}, {firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    number: req.body.number,
+    year: req.body.year,
+    height: req.body.height,
+   bio: req.body.bio})
 })
+
+
+app.delete("/player/:name", async (req, res) => {
+const resp = await Player.findOneAndDelete({_id: req.params.playerName}, {firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    number: req.body.number,
+    year: req.body.year,
+    height: req.body.height,
+   bio: req.body.bio})
+res.json(resp);
+});
 
 
 
